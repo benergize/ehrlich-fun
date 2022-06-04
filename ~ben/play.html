@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta charset = 'UTF-8'> 
+		<meta name="description" content="What if the hero's was completely random?">
+		<meta name="keywords" content="hero's journey,code culture and practice,beast in a jack">
+		<meta name="author" content="Ben Ehrlich, Isaac Switzer, Katja Vujic">
+		<title>The Hero's Journey</title>
+	</head>
+	<body>
+	
+		<style>
+			#play {
+				width:8.5in;
+				margin:0 auto;
+				border: 1px solid black;
+				padding:4px;
+				font-family:'Courier New';
+			}
+			.characterName {
+				margin-left:40%;
+			}
+			.dialogue {
+				margin-left:25%;
+				margin-right:25%;
+			}
+			.title {
+				text-align:center;
+			}
+		</style>
+	
+		<!--
+		
+			Copyright 2017 Ben Ehrlich and Isaac Switzer and Katja Vujic
+
+			Permission is hereby granted, free of charge, to any 
+			person obtaining a copy of this software and associated 
+			documentation  files (the "Software"), to deal in the 
+			Software without restriction, including without 
+			limitation the rights to use, copy, modify, merge, 
+			publish, distribute, sublicense, and/or sell copies of 
+			the Software, and to permit persons to whom the Software 
+			is furnished to do so, subject to the following 
+			conditions:
+
+			The above copyright notice and this permission notice
+			shall be included in all copies or substantial portions 
+			of the Software.
+
+			THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF 
+			ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT 
+			LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS 
+			FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO 
+			EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+			LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+			WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+			ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+			SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+			Live long and prosper.
+		
+		-->
+
+
+		<!-- Play will be printed here. -->
+		<div id = 'play'> </div>
+
+		<script>
+			//Create the play object, instaniate empty objects as placeholders.
+			var play = {
+				title: "",
+				hero: {},
+				mentor: {},
+				villain: {}
+			}
+			
+			//Arrays to populate list of possible heroes, mentors, and villains.
+			//the list is populated below in the characters/ scripts, and chosen
+			//from in a script tag further below.
+			var heroes = [];
+			var mentors = []; 
+			var villains = [];
+			var friends = [];
+			var places = [];
+		</script>
+		
+		<!-- Helper scripts-->
+			<script src = 'scripts/scr_attributeFetchers.js'></script>
+			<script src = 'scripts/scr_formatting.js'></script>
+			
+		<!-- Places -->
+			<script src = 'places/place_basement.js'></script> 
+			<script src = 'places/place_livingRoom.js'></script> 
+			<script src = 'places/place_countryRoad.js'></script> 
+			<script src = 'places/place_hallOfMirrors.js'></script> 
+			
+		<!-- Villains -->
+			<script src = 'characters/villains/char_villain_clown.js'></script>
+			<script src = 'characters/villains/char_villain_dirk.js'></script>
+			<script src = 'characters/villains/char_villain_nancy.js'></script>
+			<script src = 'characters/villains/char_villain_nelson.js'></script>
+
+		<!-- Heroes -->
+			<!--script src = 'characters/heroes/char_hero_luke.js'></script-->
+			<script src = 'characters/heroes/char_hero_lee.js'></script>
+			<script src = 'characters/heroes/char_hero_billy.js'></script>
+			<!--script src = 'characters/heroes/char_hero_cardsguy.js'></script-->
+			<script src = 'characters/heroes/char_hero_sandra.js'></script>
+			<script src = 'characters/heroes/char_hero_whitney.js'></script>
+			
+		<!-- Mentors -->
+			<script src = 'characters/mentors/char_mentor_benKenobi.js'></script> 
+			<script src = 'characters/mentors/char_mentor_susan.js'></script> 
+			<script src = 'characters/mentors/char_mentor_samuel.js'></script> 
+			<script src = 'characters/mentors/char_mentor_tara.js'></script>  
+			<script src = 'characters/mentors/char_mentor_grandma.js'></script> 
+			
+		<!-- Friends -->
+			<script src = 'characters/friends/char_friend_trivil.js'></script>  
+			<script src = 'characters/friends/char_friend_malcolmgladwell.js'></script>  
+			<script src = 'characters/friends/char_friend_petar.js'></script>  
+			<script src = 'characters/friends/char_friend_cynthia.js'></script>  
+			
+		<!-- Scenes -->
+			<script src = 'scenes/scenes_callToAdventure.js'></script>
+			<script src = 'scenes/scenes_friendship.js'></script>
+			<script src = 'scenes/scenes_firstObstacle.js'></script>
+			<script src = 'scenes/scenes_bellyOfBeast.js'></script>
+			<script src = 'scenes/scene_returnToVillage.js'></script>
+			
+		<script src = 'scripts/randomTitles.js'></script>
+			
+		<script>
+		
+			//Choose a random cast from a list of predefined characters. We will add a means either 
+			//randomize, choose your own characters, or write your own responses via text entry.
+			play.villain = villains[Math.floor(Math.random() * villains.length)];
+			play.hero = heroes[Math.floor(Math.random() * heroes.length)];
+			play.mentor = mentors[Math.floor(Math.random() * mentors.length)];
+			play.friend = friends[Math.floor(Math.random() * friends.length)];
+			
+			//hacked way of chosing the location of the first obstacle
+			play.obstacleScene = places[Math.floor(Math.random() * places.length)];
+			while(play.obstacleScene['sceneType'] == undefined) { play.obstacleScene = places[Math.floor(Math.random() * places.length)]; }
+			
+			//It is said that magic works in the cave.
+			currentPlace = places[Math.floor(Math.random() * places.length)];
+			
+			//Script array. We push elements each line of the script to this array for some reason.
+			var script = [];
+			
+			//Each scene gets sequentially run by a function for each scene defined in files in the dir scenes/
+			
+				script.push("<br/><div class = 'title'>\"" + play.name + "\"<br/><br/>written by<br/><br/>A. Computer</div><br/><br/>");
+			
+				//Meeting with the mentor
+				scene_callToAdventure();
+				 
+				//Meeting with the friend
+				if(play.hero.scenes['friendship'] != undefined) { scene_friendship(); }
+				
+				//The first obstacle
+				if(play.hero.scenes['firstObstacle'] != undefined) { scene_firstObstacle(); }
+				
+				//Belly of the beast
+				if(play.hero.scenes['bellyOfBeast'] != undefined) { scene_bellyOfBeast(); }
+				
+				//Return to village
+				if(play.hero.scenes['returnToVillage'] != undefined) { scene_returnToVillage(); }
+			
+			//Once we've filled the script array with lines from all the scenes, iterate through it and print it out.
+			for(v = 0; v < script.length; v++) { 
+				document.getElementById('play').innerHTML += (script[v] + "<br/><br/>");
+			}
+			
+		</script>
+	</body>
+</html>

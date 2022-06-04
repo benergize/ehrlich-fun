@@ -1,0 +1,10 @@
+/*__________________________________________________________________________________
+//
+//	FILENAME: filename.extension
+//	CREATED: MM/DD/YY
+//	AUTHOR: Firstname Lastname
+//	PURPOSE: Lorem ipsum dolor sit amet consecutor whatever whatever whatever what
+//	(cont.) Use a cont if you go past the bar at the top.	
+//
+//
+*/
